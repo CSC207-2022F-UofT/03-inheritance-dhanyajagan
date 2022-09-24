@@ -15,7 +15,22 @@ class BagMain {
      * on new Bag types (and HandBag subclasses)!
      */
     public static void enhanceBags(Bag[] bags, boolean double_enhance_handbags) {
-        // TODO: Implement this.
+        if (double_enhance_handbags) {
+            for(int i = 0; i < bags.length; i++) {
+                if (bags[i] instanceof HandBag) {
+                    bags[i].enhance();
+                    bags[i].enhance();
+                }
+                else {
+                    bags[i].enhance();
+                }
+            }
+        }
+        else {
+            for(int i = 0; i < bags.length; i++) {
+                bags[i].enhance();
+            }
+        }
     }
 
     /**
@@ -27,7 +42,19 @@ class BagMain {
      * @param bags An array of Bags
      * @return The total number of straps of CrossbodyBags.
      */
+
+    // first we need to have a counter. Next, we loop the array and check to see if the current bag is an instance of
+    // crossbody bags. If it is, we need to get its number of straps and add that number to the counter. (Note: I think
+    // we might need to typecast the bag in question to a crossbody bag.
+    // Next, return the total count!
+    //
     public static int countCrossbodyStraps(Bag[] bags) {
-        // TODO: Implement this.
+        int counter = 0;
+        for(int i = 0; i < bags.length; i++) {
+            if (bags[i] instanceof CrossbodyBag) {
+                counter = counter + ((CrossbodyBag) bags[i]).getNumberOfStraps();
+            }
+        }
+        return counter;
     }
 }

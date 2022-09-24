@@ -13,7 +13,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
-
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
 
 
@@ -26,6 +29,10 @@ public abstract class Bag {
      * be empty (e.g. numberOfContents is 0 and an empty String array for
      * its contents.)
      */
+    public Bag(String color, int capacity) {
+        this.color = color;
+        this.capacity = capacity;
+    }
 
 
 
@@ -37,6 +44,17 @@ public abstract class Bag {
      *           - getNumberOfContents
      *           - getCapacity
      */
+    public String getColor() {
+        return this.color;
+    }
+
+    public int getNumberOfContents() {
+        return this.numberOfContents;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
 
 
 
@@ -46,7 +64,9 @@ public abstract class Bag {
      *       color of this bag to the given color.
      */
 
-
+    public void setColor(String colorgiven) {
+        this.color = colorgiven;
+    }
 
 
 
@@ -60,8 +80,25 @@ public abstract class Bag {
      *       This method should return true if the item was added
      *       and false otherwise.
      */
+    // First, we need to make a new array with the same number of elements as contents (so it would be number of
+    // contents + 1). Next, we would need to copy all of the elements from the original contents array (this.contents),
+    // into the new array. And at last, we would need to copy the string 'item' from the parameter to the last slot in
+    // the new array, and set this.contents to equal the new array.
 
-
+    public boolean addItem(String item) {
+        if (this.numberOfContents < this.capacity)
+        {
+            String[] copy_contents = new String[this.numberOfContents + 1];
+            for(int i = 0; i < this.numberOfContents; i++) {
+                copy_contents[i] = this.contents[i];
+            }
+            copy_contents[copy_contents.length - 1] = item;
+            this.contents = copy_contents;
+            this.numberOfContents = this.numberOfContents + 1;
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -75,8 +112,26 @@ public abstract class Bag {
      *
      * @return
      */
+    // first check to see if there are items in the bag. If, not, return null. Else, store the last item of the contents
+    // into a variable. Next do the same process of creating an array with one less number of contents, and loop through
+    // the original array and do the copying process like above. Modify the numberOfContents accordingly.
 
+    public String popItem() {
+        if (this.numberOfContents == 0) {
+            return null;
+        }
+        else {
+            String last_item = this.contents[numberOfContents - 1];
+            String[] copy_contents = new String[this.numberOfContents - 1];
+            for(int i = 0; i < this.numberOfContents - 1; i++) {
+                copy_contents[i] = this.contents[i];
+            }
+            this.contents = copy_contents;
+            this.numberOfContents = this.numberOfContents - 1;
+            return last_item;
+        }
 
+    }
 
 
 
@@ -85,8 +140,15 @@ public abstract class Bag {
      *
      * @param n the amount to increase this Bag's capacity by
      */
+    // increase the capacity attribute of this bag by n, and then edit the existing contents array to accomodate
+    // additional space.
     public void increaseCapacity(int n) {
-        // TODO: Implement this method.
+        this.capacity = this.capacity + n;
+        String[] copy_contents = new String[this.numberOfContents + n];
+        for(int i = 0; i < this.numberOfContents; i++) {
+            copy_contents[i] = this.contents[i];
+        }
+        this.contents = copy_contents;
 
     }
 
