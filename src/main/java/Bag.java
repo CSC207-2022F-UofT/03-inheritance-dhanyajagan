@@ -110,7 +110,7 @@ public abstract class Bag {
      *
      * If there are no items in this Bag, return null.
      *
-     * @return
+     * @return the last item added to this bag
      */
     // first check to see if there are items in the bag. If, not, return null. Else, store the last item of the contents
     // into a variable. Next do the same process of creating an array with one less number of contents, and loop through
@@ -157,7 +157,7 @@ public abstract class Bag {
      * This method requires you to have created the private
      * instance variables mentioned above.
      *
-     * @return
+     * @return a string represention of the bags
      */
     @Override
     public String toString() {
